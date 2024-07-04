@@ -5,6 +5,19 @@ The Python project 'DNNGP' can be used to implement genome-wide prediction (GP),
 
 Data used in the papers' example-data.tgz 'can be found in the package at [DNNGP-v1.0.0.zip](https://github.com/AIBreeding/DNNGP/releases/download/v1.0.0/DNNGP-v1.0.0.zip)
 
+The original data download address is as follows:
+  maize: 
+    https://pan.baidu.com/s/1AsPJLTe--gU5EN8aFTMYPA
+    http://www.maizego.org/download/Agronomic_23Traits.txt
+
+  tomato:
+    https://www.ncbi.nlm.nih.gov/sra?term=SRP150040
+    https://www.ncbi.nlm.nih.gov/sra?term=SRP186721
+    https://www.ncbi.nlm.nih.gov/sra?term=SRP186721
+
+  wheat:
+    https://github.com/gdlc/BGLR-R/blob/master/data/wheat.RData
+
 More information could be found in the [user manual](DNNGP-usermanual.pdf).
 
 Tips:
