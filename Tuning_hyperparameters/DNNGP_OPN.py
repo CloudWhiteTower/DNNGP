@@ -1,4 +1,4 @@
-# DNNGP优化脚本
+# DNNGP3 tuning hyperparameters script
 import os
 import re
 import json
