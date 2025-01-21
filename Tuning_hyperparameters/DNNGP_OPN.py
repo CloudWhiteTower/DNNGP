@@ -19,7 +19,7 @@ cvs = 10 # K-fold cross-validation
 # Obtain all tsv files in the directory where the pkl file resides
 tsv_files = [f for f in os.listdir(pkl_dir) if f.endswith('.tsv')]
 
-# Define super parameter search space (see https://github.com/facebookresearch/nevergrad)
+# Define hyperparameters search space (see https://github.com/facebookresearch/nevergrad)
 instr = ng.p.Instrumentation(
     batch_size=ng.p.Scalar(lower=32, upper=1024).set_integer_casting(),
     lr=ng.p.Log(lower=1e-4, upper=1),
