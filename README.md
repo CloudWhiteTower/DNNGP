@@ -24,7 +24,10 @@ Tips:
 Deep learning models perform better with larger sample sizes.
 
 ### Change log
-
+2025.01.21:  
+ 1. Updated the hyperparameter auto-tuning script `DNNGP_OPN.py`, which you can find in the `Tuning_hyperparameters` directory.
+ 2. `DNNGP_OPN.py` enables batch tuning of multi phenotype.
+    
 2024.03:
  1. Update the software to version 3.1 for both Windows and Linux.
  2. Optimize the naming of output files for model training. The current file name concatenates the `input phenotype file name`, the `original output file name` and the `part parameter value`. This change prevents the issue of overlapping phenotypic characters and fold number collisions with files.
