@@ -25,5 +25,7 @@ After experiments, it was found that some users may encounter the issue of being
 export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
 export PATH=$CONDA_PREFIX/bin:$PATH
 ```
+We strongly recommend using the call GPU for tuning, otherwise it will take too long.  
+  
 More information about the script is described in the script file in the form of comments.  
 :telephone_receiver:If there are problems with use, please contact us.
