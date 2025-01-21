@@ -125,4 +125,5 @@ dependencies:
   - pip:
       - tensorflow-probability==0.14.0
       - framework-reproducibility==0.4.0
+      - tensorflow-gpu==2.6.0
 
