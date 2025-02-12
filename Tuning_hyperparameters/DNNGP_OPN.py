@@ -24,8 +24,8 @@ instr = ng.p.Instrumentation(
     batch_size=ng.p.Scalar(lower=32, upper=1024).set_integer_casting(),
     lr=ng.p.Log(lower=1e-4, upper=1),
     patience=ng.p.Scalar(lower=10, upper=50).set_integer_casting(),
-    dropout1=ng.p.Log(lower=0.0, upper=0.9),
-    dropout2=ng.p.Log(lower=0.0, upper=0.9),
+    dropout1=ng.p.Log(lower=0.01, upper=0.9),
+    dropout2=ng.p.Log(lower=0.01, upper=0.9),
     earlystopping=ng.p.Scalar(lower=50, upper=100).set_integer_casting()
 )
 
