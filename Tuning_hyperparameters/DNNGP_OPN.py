@@ -5,6 +5,7 @@ import json
 import subprocess
 import numpy as np
 import nevergrad as ng
+import tensorflow as tf
 # The script needs to set parameters in three places, one is the #10 directory location, the second is the #21 hyperparameter search space, and the third is the #49 DNNGP native command.
 # Set priorities in descending order, except for the directory, the default parameters are sufficient for most requests.
 # Define directories and file paths
@@ -18,6 +19,25 @@ cvs = 10 # K-fold cross-validation
 
 # Obtain all tsv files in the directory where the pkl file resides
 tsv_files = [f for f in os.listdir(pkl_dir) if f.endswith('.tsv')]
+
+def check_gpu_available():
+    """Check and display GPU availability information"""
+    gpus = tf.config.list_physical_devices('GPU')
+    if gpus:
+        print("🎉 GPU is available!")
+        for idx, gpu in enumerate(gpus):
+            print(f"[Device {idx}]")
+            print(f"  Name: {gpu.name}")
+            try:
+                details = tf.config.experimental.get_device_details(gpu)
+                print(f"  Compute Capability: {details.get('compute_capability')}")
+                print(f"  Device Type: {details.get('device_type', 'N/A')}")
+            except AttributeError:
+                print("  Unable to retrieve detailed device information (may require TensorFlow version upgrade)")
+        return True
+    else:
+        print("⚠️ No GPU detected, will use CPU")
+        return False
 
 # Define hyperparameters search space (see https://github.com/facebookresearch/nevergrad)
 instr = ng.p.Instrumentation(
