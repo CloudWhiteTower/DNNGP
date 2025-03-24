@@ -38,7 +38,7 @@ def check_gpu_available():
     else:
         print("⚠️ No GPU detected, will use CPU")
         return False
-
+check_gpu_available()
 # Define hyperparameters search space (see https://github.com/facebookresearch/nevergrad)
 instr = ng.p.Instrumentation(
     batch_size=ng.p.Scalar(lower=32, upper=1024).set_integer_casting(),
