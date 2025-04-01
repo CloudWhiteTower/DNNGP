@@ -11,12 +11,12 @@ import tensorflow as tf
 # Define directories and file paths
 output_dir = r'..\Output_files'
 pkl_file = r"..\Input_files\wheat599_pc95.pkl"
-pkl_dir = os.path.dirname(pkl_file)
 budget = 200  # Optimize the number of script iterations
 alpha = 0.7  # Adjust this weight to balance the importance of mean and variance in the optimization process
 beta = 0.1  # This parameter is adjusted to control the nonlinear effect of the deviation in the optimization process
 cvs = 10 # K-fold cross-validation
 
+pkl_dir = os.path.dirname(pkl_file)
 # Obtain all tsv files in the directory where the pkl file resides
 tsv_files = [f for f in os.listdir(pkl_dir) if f.endswith('.tsv')]
 
