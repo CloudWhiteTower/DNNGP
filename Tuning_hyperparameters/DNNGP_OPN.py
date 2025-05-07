@@ -12,8 +12,8 @@ import tensorflow as tf
 output_dir = r'..\Output_files'
 pkl_file = r"..\Input_files\wheat599_pc95.pkl"
 budget = 200  # Optimize the number of script iterations
-alpha = 0.7  # Adjust this weight to balance the importance of mean and variance in the optimization process
-beta = 0.1  # This parameter is adjusted to control the nonlinear effect of the deviation in the optimization process
+alpha = 0.7  # The larger the value, the more focused the optimization is on the cross-validated mean.
+beta = 0.1  # The larger the value, the more focused the optimization is on cross-validation stability.
 cvs = 10 # K-fold cross-validation
 
 pkl_dir = os.path.dirname(pkl_file)
