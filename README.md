@@ -13,7 +13,7 @@ The original data download address is as follows:
   tomato:  
     https://www.ncbi.nlm.nih.gov/sra?term=SRP150040  
     https://www.ncbi.nlm.nih.gov/sra?term=SRP186721  
-    https://www.ncbi.nlm.nih.gov/sra?term=SRP186721  
+    https://www.ncbi.nlm.nih.gov/sra?term=SRP172989  
   
   wheat:  
     https://github.com/gdlc/BGLR-R/blob/master/data/wheat.RData  
