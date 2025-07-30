@@ -9,8 +9,8 @@ import tensorflow as tf
 # The script needs to set parameters in three places, one is the #10 directory location, the second is the #21 hyperparameter search space, and the third is the #49 DNNGP native command.
 # Set priorities in descending order, except for the directory, the default parameters are sufficient for most requests.
 # Define directories and file paths
-output_dir = r'..\Output_files'
-pkl_file = r"..\Input_files\wheat599_pc95.pkl"
+output_dir = r'../Output_files'
+pkl_file = r"../Input_files/wheat599_pc95.pkl"
 budget = 200  # Optimize the number of script iterations
 alpha = 0.7  # The larger the value, the more focused the optimization is on the cross-validated mean.
 beta = 0.1  # The larger the value, the more focused the optimization is on cross-validation stability.
