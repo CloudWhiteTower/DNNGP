@@ -2,8 +2,8 @@
 #So, please run the program in a DNNGP environment.
 import pandas as pd
 ########Set path section
-inpath=r"C:\Users\Cloud\Desktop\ai_homework\data\Maize_SelfingPrediction_Example\new_test\snp\snp.eigenvec" #Set input path
-outpath=r"C:\Users\Cloud\Desktop\ai_homework\data\Maize_SelfingPrediction_Example\new_test\snp\maize1k.train.pkl" #Set output path
+inpath=r"C:\Users\Cloud\Desktop\ai_homework\data\Maize_SelfingPrediction_Example\data_need\maize1k.train.eigenvec" #Set input path
+outpath=r"C:\Users\Cloud\Desktop\ai_homework\data\Maize_SelfingPrediction_Example\data_need\maize1k.train.pkl" #Set output path
 
 ########Conversion format section
 inpath=inpath.replace('\\','/') #Replace '\' with '/' in the input path.

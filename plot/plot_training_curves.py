@@ -35,83 +35,89 @@ def plot_training_history(csv_path, output_dir=None, show_plot=True):
     # 获取文件名前缀（用于保存图片）
     base_name = os.path.splitext(os.path.basename(csv_path))[0]
     
-    # 创建图形
-    fig, axes = plt.subplots(2, 2, figsize=(15, 12))
+    # 创建图形 - 修改为2行3列布局
+    fig, axes = plt.subplots(2, 3, figsize=(18, 12))
     fig.suptitle('DNNGP训练过程可视化', fontsize=16, fontweight='bold')
     
-    # 1. Loss曲线
+    # 1. 训练集Loss曲线
     ax1 = axes[0, 0]
     ax1.plot(df['epoch'], df['loss'], 'b-', linewidth=2, label='训练集Loss')
-    ax1.plot(df['epoch'], df['val_loss'], 'r-', linewidth=2, label='验证集Loss')
     ax1.set_xlabel('Epoch', fontsize=12)
     ax1.set_ylabel('Loss', fontsize=12)
-    ax1.set_title('Loss曲线', fontsize=14, fontweight='bold')
+    ax1.set_title('训练集Loss曲线', fontsize=14, fontweight='bold')
     ax1.legend(fontsize=10)
     ax1.grid(True, alpha=0.3)
     
     # 标注最小值
     min_train_loss = df['loss'].min()
-    min_val_loss = df['val_loss'].min()
     min_train_epoch = df.loc[df['loss'].idxmin(), 'epoch']
-    min_val_epoch = df.loc[df['val_loss'].idxmin(), 'epoch']
     ax1.scatter([min_train_epoch], [min_train_loss], color='blue', s=100, zorder=5)
-    ax1.scatter([min_val_epoch], [min_val_loss], color='red', s=100, zorder=5)
-    ax1.annotate(f'最小训练Loss: {min_train_loss:.4f}\nEpoch: {int(min_train_epoch)}',
+    ax1.annotate(f'最小: {min_train_loss:.4f}\nEpoch: {int(min_train_epoch)}',
                 xy=(min_train_epoch, min_train_loss),
                 xytext=(10, 10), textcoords='offset points',
                 bbox=dict(boxstyle='round,pad=0.5', fc='yellow', alpha=0.7),
                 fontsize=9)
     
-    # 2. MAE曲线
+    # 2. 验证集Loss曲线
     ax2 = axes[0, 1]
-    ax2.plot(df['epoch'], df['mae'], 'b-', linewidth=2, label='训练集MAE')
-    ax2.plot(df['epoch'], df['val_mae'], 'r-', linewidth=2, label='验证集MAE')
+    min_val_loss = df['val_loss'].min()
+    min_val_epoch = df.loc[df['val_loss'].idxmin(), 'epoch']
+    ax2.plot(df['epoch'], df['val_loss'], 'r-', linewidth=2, label='验证集Loss')
     ax2.set_xlabel('Epoch', fontsize=12)
-    ax2.set_ylabel('MAE (Mean Absolute Error)', fontsize=12)
-    ax2.set_title('MAE曲线', fontsize=14, fontweight='bold')
+    ax2.set_ylabel('Loss', fontsize=12)
+    ax2.set_title('验证集Loss曲线', fontsize=14, fontweight='bold')
     ax2.legend(fontsize=10)
     ax2.grid(True, alpha=0.3)
+    ax2.scatter([min_val_epoch], [min_val_loss], color='red', s=100, zorder=5)
+    ax2.annotate(f'最小: {min_val_loss:.4f}\nEpoch: {int(min_val_epoch)}',
+                xy=(min_val_epoch, min_val_loss),
+                xytext=(10, 10), textcoords='offset points',
+                bbox=dict(boxstyle='round,pad=0.5', fc='yellow', alpha=0.7),
+                fontsize=9)
     
-    # 标注最小值
+    # 3. 训练集MAE曲线
+    ax3 = axes[0, 2]
+    ax3.plot(df['epoch'], df['mae'], 'b-', linewidth=2, label='训练集MAE')
+    ax3.set_xlabel('Epoch', fontsize=12)
+    ax3.set_ylabel('MAE (Mean Absolute Error)', fontsize=12)
+    ax3.set_title('训练集MAE曲线', fontsize=14, fontweight='bold')
+    ax3.legend(fontsize=10)
+    ax3.grid(True, alpha=0.3)
+    
+    # 4. 验证集MAE曲线
+    ax4 = axes[1, 0]
     min_val_mae = df['val_mae'].min()
     min_val_mae_epoch = df.loc[df['val_mae'].idxmin(), 'epoch']
-    ax2.scatter([min_val_mae_epoch], [min_val_mae], color='red', s=100, zorder=5)
-    ax2.annotate(f'最小验证MAE: {min_val_mae:.4f}\nEpoch: {int(min_val_mae_epoch)}',
+    ax4.plot(df['epoch'], df['val_mae'], 'r-', linewidth=2, label='验证集MAE')
+    ax4.set_xlabel('Epoch', fontsize=12)
+    ax4.set_ylabel('MAE (Mean Absolute Error)', fontsize=12)
+    ax4.set_title('验证集MAE曲线', fontsize=14, fontweight='bold')
+    ax4.legend(fontsize=10)
+    ax4.grid(True, alpha=0.3)
+    ax4.scatter([min_val_mae_epoch], [min_val_mae], color='red', s=100, zorder=5)
+    ax4.annotate(f'最小: {min_val_mae:.4f}\nEpoch: {int(min_val_mae_epoch)}',
                 xy=(min_val_mae_epoch, min_val_mae),
                 xytext=(10, 10), textcoords='offset points',
                 bbox=dict(boxstyle='round,pad=0.5', fc='yellow', alpha=0.7),
                 fontsize=9)
     
-    # 3. MSE曲线
-    ax3 = axes[1, 0]
-    ax3.plot(df['epoch'], df['mse'], 'b-', linewidth=2, label='训练集MSE')
-    ax3.plot(df['epoch'], df['val_mse'], 'r-', linewidth=2, label='验证集MSE')
-    ax3.set_xlabel('Epoch', fontsize=12)
-    ax3.set_ylabel('MSE (Mean Squared Error)', fontsize=12)
-    ax3.set_title('MSE曲线', fontsize=14, fontweight='bold')
-    ax3.legend(fontsize=10)
-    ax3.grid(True, alpha=0.3)
+    # 5. 训练集MSE曲线
+    ax5 = axes[1, 1]
+    ax5.plot(df['epoch'], df['mse'], 'b-', linewidth=2, label='训练集MSE')
+    ax5.set_xlabel('Epoch', fontsize=12)
+    ax5.set_ylabel('MSE (Mean Squared Error)', fontsize=12)
+    ax5.set_title('训练集MSE曲线', fontsize=14, fontweight='bold')
+    ax5.legend(fontsize=10)
+    ax5.grid(True, alpha=0.3)
     
-    # 4. 过拟合分析
-    ax4 = axes[1, 1]
-    # 计算训练集和验证集loss的差异
-    loss_gap = df['val_loss'] - df['loss']
-    ax4.plot(df['epoch'], loss_gap, 'g-', linewidth=2)
-    ax4.axhline(y=0, color='k', linestyle='--', alpha=0.3)
-    ax4.set_xlabel('Epoch', fontsize=12)
-    ax4.set_ylabel('验证Loss - 训练Loss', fontsize=12)
-    ax4.set_title('过拟合分析 (正值表示过拟合)', fontsize=14, fontweight='bold')
-    ax4.grid(True, alpha=0.3)
-    
-    # 标注过拟合程度
-    final_gap = loss_gap.iloc[-1]
-    max_gap = loss_gap.max()
-    gap_color = 'red' if final_gap > 0.1 else 'orange' if final_gap > 0.05 else 'green'
-    ax4.fill_between(df['epoch'], 0, loss_gap, where=(loss_gap > 0), 
-                     alpha=0.3, color='red', label='过拟合区域')
-    ax4.fill_between(df['epoch'], 0, loss_gap, where=(loss_gap <= 0), 
-                     alpha=0.3, color='green', label='良好拟合区域')
-    ax4.legend(fontsize=10)
+    # 6. 验证集MSE曲线
+    ax6 = axes[1, 2]
+    ax6.plot(df['epoch'], df['val_mse'], 'r-', linewidth=2, label='验证集MSE')
+    ax6.set_xlabel('Epoch', fontsize=12)
+    ax6.set_ylabel('MSE (Mean Squared Error)', fontsize=12)
+    ax6.set_title('验证集MSE曲线', fontsize=14, fontweight='bold')
+    ax6.legend(fontsize=10)
+    ax6.grid(True, alpha=0.3)
     
     # 添加统计信息文本框
     textstr = f'训练统计信息:\n'
@@ -119,8 +125,7 @@ def plot_training_history(csv_path, output_dir=None, show_plot=True):
     textstr += f'最终训练Loss: {df["loss"].iloc[-1]:.4f}\n'
     textstr += f'最终验证Loss: {df["val_loss"].iloc[-1]:.4f}\n'
     textstr += f'最小验证Loss: {min_val_loss:.4f} (Epoch {int(min_val_epoch)})\n'
-    textstr += f'最小验证MAE: {min_val_mae:.4f} (Epoch {int(min_val_mae_epoch)})\n'
-    textstr += f'过拟合程度: {final_gap:.4f}'
+    textstr += f'最小验证MAE: {min_val_mae:.4f} (Epoch {int(min_val_mae_epoch)})'
     
     props = dict(boxstyle='round', facecolor='wheat', alpha=0.8)
     fig.text(0.02, 0.02, textstr, fontsize=10, verticalalignment='bottom',
